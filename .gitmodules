@@ -1,0 +1,4 @@
+[submodule "backend_common"]
+	path = backend_common
+	url = https://github.com/abdullahalhoothy/backend_common.git
+	branch = main
