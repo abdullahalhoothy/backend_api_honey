@@ -21,9 +21,6 @@ schema = {
 }
 
 sample_data = {
-  "responseCode": 200,
-  "data": {
-    "justForYou": {
       "id": "66faa130bedf3403197df77c",
       "productName": "Wildflower Honey",
       "productDescription": "asdfasdf",
@@ -43,33 +40,7 @@ sample_data = {
         "userName": "Barolo",
         "userProfileImageUrl": "Italy"
       }'''
-    },
-    # "bestPick": {
-    #   "id": "66faa130bedf3403197df77c",
-    #   "productName": "Wildflower Honey",
-    #   "productDescription": "asdfasdf",
-    #   "tagline": "A good match for your taste",
-    #   "productUrl": "https://bestbees.com/2022/10/26/types-of-honey/",
-    #   "averageRating": "4.5",
-    #   "totalRatings": "884",
-    #   "discountedPrice": "32.99",
-    #   "discountPercentage": "32%",
-    #   "originalPrice": "50",
-    #   "city": "Barolo",
-    #   "country": "Italy",
-    #   "countryFlagUrl": "https://imageicon",
-    #   "userRating": {
-    #     "rating": "4.3",
-    #     "review": "50",
-    #     "userName": "Barolo",
-    #     "userProfileImageUrl": "Italy"
-    #   }
-    # },
-  },
-"bannerImageUrl": "https://"
-    ,
-  "message": "Honey list fetched successfully"
-}
+  }
 
 
 async def create_product_table() -> None:
@@ -83,8 +54,7 @@ async def create_product_table() -> None:
     """
     await Database.execute(create_table_query)
     columns = ''.join([f'{k}, ' for k in schema.keys()]).rstrip(', ')
-    for entries in sample_data['data'].values():
-        await insert_product(columns, entries)
+    await insert_product(columns, sample_data)
 
 async def insert_product(columns: str, entries: dict) -> None:
     # Create table if it doesn't exist
