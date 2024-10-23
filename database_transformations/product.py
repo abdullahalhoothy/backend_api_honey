@@ -1,84 +1,60 @@
 from typing import Optional
 import json
 from backend_common.database import Database
+from database_transformations.product_schema import SCHEMA
+from database_transformations.sample_product_data import SAMPLE_PRODUCT
 
-
-schema = {
-    "id": "TEXT PRIMARY KEY",
-    "productName": "varchar(70)",
-    "productDescription": "text",
-    "tagline": "text",
-    "productUrl": "varchar(500)",
-    "averageRating": "varchar(10)",
-    "totalRatings": "varchar(10)",
-    "discountedPrice": "varchar(10)",
-    "discountPercentage": "varchar(10)",
-    "originalPrice": "varchar(10)",
-    "city": "varchar(30)",
-    "country": "varchar(30)",
-    "countryFlagUrl": "varchar(500)",
-    "userRating": "JSONB"
-}
-
-sample_data = {
-      "id": "66faa130bedf3403197df77c",
-      "productName": "Wildflower Honey",
-      "productDescription": "asdfasdf",
-      "tagline": "A good match for your taste",
-      "productUrl": "https://bestbees.com/2022/10/26/types-of-honey/",
-      "averageRating": "4.5",
-      "totalRatings": "884",
-      "discountedPrice": "32.99",
-      "discountPercentage": "32%",
-      "originalPrice": "50",
-      "city": "Barolo",
-      "country": "Italy",
-      "countryFlagUrl": "https://imageicon",
-      "userRating": '''{
-        "rating": "4.3",
-        "review": "50",
-        "userName": "Barolo",
-        "userProfileImageUrl": "Italy"
-      }'''
-  }
 
 
 async def create_product_table() -> None:
     # Create table if it doesn't exist
 
-    columns = ''.join([f'{k} {v},' for k, v in schema.items()]).strip(',')
+    columns = ''.join([f'{k} {v},' for k, v in SCHEMA.items()]).strip(',')
     create_table_query = f"""
     CREATE TABLE IF NOT EXISTS Product (
             {columns}
     );
     """
     await Database.execute(create_table_query)
-    columns = ''.join([f'{k}, ' for k in schema.keys()]).rstrip(', ')
-    await insert_product(columns, sample_data)
+    columns = ''.join([f'{k}, ' for k in SCHEMA.keys()]).rstrip(', ')
+    await insert_product(columns)
 
-async def insert_product(columns: str, entries: dict) -> None:
+async def insert_product(columns: str) -> None:
     # Create table if it doesn't exist
-    placeholders = ''.join([f'${i + 1}, ' for i in range(len(entries.values()))]).rstrip(', ')
-    entry = [f'{v}' for v in entries.values()]
+    entries = SAMPLE_PRODUCT
+    placeholders = ''.join([f'${i + 1}, ' for i in range(len(entries[0].values()))]).rstrip(', ')
+    entries = [list(entry.values()) for entry in entries]
     query = f"""
         INSERT INTO Product ({columns})  
             VALUES({placeholders})
         On CONFLICT(id) DO NOTHING;
         """
-    await Database.execute(query, *entry)
+    await Database.execute_many(query, entries)
 
 
-async def get_all_products(req: Optional[object]) -> dict:
+async def get_recommended_products(req: Optional[object]) -> dict:
     # Create table if it doesn't exist
-    query = f"""SELECT * FROM Product;"""
+    query = f"""
+    SELECT * FROM Product
+    WHERE id='66faa130bedf3403197df77c'            
+    ;"""
     row = dict((await Database.fetchrow(query)).items())
     row['userrating'] = json.loads(row['userrating'])
     data = {
         'justForYou': row,
-        'bestPick': row
+        'bestPick': row,
+        'bannerImageUrl': "https://"
     }
+    return  data
+
+async def get_preference_product_detail(req: Optional[object]) -> dict:
+    # Create table if it doesn't exist
+    query = f"""
+    SELECT * FROM Product
+    WHERE id='66faa130bedf3403197df77d'            
+    ;"""
+    row = dict((await Database.fetchrow(query)).items())
+    row['userrating'] = json.loads(row['userrating'])
     return  {
-        "responseCode": 200,
-        "message": "Returned recommended products.",
-        "data": data
+        'product': row
     }

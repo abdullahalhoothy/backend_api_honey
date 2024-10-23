@@ -1,7 +1,4 @@
 configuration_response = {
-  "responseCode": 200,
-  "message": "Configuration loaded successfully",
-   "data": {
     "appSettings": {
       "appName": "Honey Delight",
       "version": "1.0.0",
@@ -26,5 +23,4 @@ configuration_response = {
       "termsAndConditionsUrl": "https://honeydelight.com/terms",
       "privacyPolicyUrl": "https://honeydelight.com/privacy"
     }
-  },
 }
