@@ -6,7 +6,8 @@ from backend_common.auth import JWTBearer
 from backend_common.database import Database
 from backend_common.dtypes.response_dtypes import ConfigurationResponse, RecommendedProducts
 from backend_common.request_processor import request_handling
-from database_transformations.product import create_product_table, get_all_products
+from database_transformations.product import (create_product_table, get_recommended_products,
+                                              get_preference_product_detail)
 
 
 @app.on_event("startup")
@@ -20,18 +21,18 @@ async def shutdown_event():
     await Database.close_pool()
 
 
-@app.get('/index2', dependencies=[Depends(JWTBearer())])
-# this needs to use request_handling
-def index():
-    return {'message': 'Hello World'}
-
-
 @app.get('/configuration', dependencies=[])
 async def configuration():
-    return await request_handling(None, None, ConfigurationResponse,
+    return await request_handling(None, None,
                      None, configuration_response)
 
 @app.get('/recommended_products', dependencies=[])
 async def recommended_products():
-    return await request_handling(None, None, RecommendedProducts,
-                                  get_all_products)
+    return await request_handling(None, None,
+                                  get_recommended_products)
+
+@app.get('/preference_product_detail', dependencies=[])
+async def recommended_products():
+    return await request_handling(None, None,
+                                  get_preference_product_detail)
+
