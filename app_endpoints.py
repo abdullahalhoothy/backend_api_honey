@@ -4,7 +4,6 @@ from fastapi import Depends
 from api_responses.configuration import configuration_response
 from backend_common.auth import JWTBearer
 from backend_common.database import Database
-from backend_common.dtypes.response_dtypes import ConfigurationResponse, RecommendedProducts
 from backend_common.request_processor import request_handling
 from database_transformations.product import (create_product_table, get_recommended_products,
                                               get_preference_product_detail)
