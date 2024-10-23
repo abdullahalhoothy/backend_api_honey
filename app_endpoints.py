@@ -22,16 +22,16 @@ async def shutdown_event():
 
 @app.get('/configuration', dependencies=[])
 async def configuration():
-    return await request_handling(None, None,
-                     None, configuration_response)
+    return await request_handling(None, None, None, None,
+                                  configuration_response)
 
 @app.get('/recommended_products', dependencies=[])
 async def recommended_products():
-    return await request_handling(None, None,
+    return await request_handling(None, None, None,
                                   get_recommended_products)
 
 @app.get('/preference_product_detail', dependencies=[])
 async def recommended_products():
-    return await request_handling(None, None,
+    return await request_handling(None, None, None,
                                   get_preference_product_detail)
 
