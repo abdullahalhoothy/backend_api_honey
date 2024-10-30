@@ -5,12 +5,6 @@ from pydantic import BaseModel, Field
 T = TypeVar("T")
 
 
-class ResModel(BaseModel, Generic[T]):
-    message: str
-    request_id: str
-    data: T
-
-
 class UserRating(BaseModel):
     rating: str
     review: str
