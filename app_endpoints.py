@@ -5,8 +5,17 @@ from api_responses.configuration import configuration_response
 from backend_common.auth import JWTBearer
 from backend_common.database import Database
 from backend_common.request_processor import request_handling
-from database_transformations.product import (create_product_table, get_recommended_products,
-                                              get_preference_product_detail)
+from database_transformations.product import (
+    create_product_table,
+    get_recommended_products,
+    get_preference_product_detail,
+)
+
+
+from api_responses.response_dtypes import (
+    FavorateProductsResponse,
+    PreferenceProductDetailResponse,
+)
 
 
 @app.on_event("startup")
@@ -20,18 +29,25 @@ async def shutdown_event():
     await Database.close_pool()
 
 
-@app.get('/configuration', dependencies=[])
+@app.get("/configuration", dependencies=[])
 async def configuration():
-    return await request_handling(None, None, None, None,
-                                  configuration_response)
+    return await request_handling(None, None, None, None, configuration_response)
 
-@app.get('/recommended_products', dependencies=[])
+
+@app.get("/recommended_products", dependencies=[])
 async def recommended_products():
-    return await request_handling(None, None, None,
-                                  get_recommended_products)
+    return await request_handling(
+        None, None, FavorateProductsResponse, get_recommended_products, "", True
+    )
 
-@app.get('/preference_product_detail', dependencies=[])
-async def recommended_products():
-    return await request_handling(None, None, None,
-                                  get_preference_product_detail)
 
+@app.get("/preference_product_detail", dependencies=[])
+async def preference_product_detail():
+    return await request_handling(
+        None,
+        None,
+        PreferenceProductDetailResponse,
+        get_preference_product_detail,
+        "",
+        True,
+    )
