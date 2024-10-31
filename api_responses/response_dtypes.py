@@ -1,4 +1,5 @@
 from typing import Dict, List, TypeVar, Generic, Literal, Any, Optional
+from decimal import Decimal
 
 from pydantic import BaseModel, Field
 
@@ -35,3 +36,27 @@ class Product(BaseModel):
 
 class ProductDetail(BaseModel):
     product: Product
+
+
+class UserReview(BaseModel):
+    id: int
+    name: str
+    userProfileImageUrl: str
+    description: str
+    averageRating: Decimal
+    totalRatings: int
+    time: str
+
+
+class UserReviews(BaseModel):
+    reviews: List[UserReview]
+
+
+class FavoriteProduct(BaseModel):
+    id: int
+    name: str
+    searchType: str
+
+
+class FavoriteProducts(BaseModel):
+    products: List[FavoriteProduct]
