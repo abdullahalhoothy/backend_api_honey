@@ -49,8 +49,7 @@ async def get_recommended_products(req: Optional[object] = None) -> dict:
 async def get_preference_product_detail(req: Optional[object] = None) -> dict:
     # Create table if it doesn't exist
     query = f"""
-    SELECT * FROM Product
-    WHERE id='66faa130bedf3403197df77d'            
+    SELECT * FROM Product          
     ;"""
 
     row = await Database.fetchrow(query)
