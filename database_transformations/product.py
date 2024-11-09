@@ -54,7 +54,7 @@ async def get_preference_product_detail(req: Optional[object] = None) -> dict:
 
     row = await Database.fetch(query)
 
-    dict_data = dict(row)
+    dict_data = dict(enumerate(row))
 
     dict_data["userrating"] = json.loads(dict_data["userrating"])
 
