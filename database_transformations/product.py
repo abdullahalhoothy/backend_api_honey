@@ -52,7 +52,7 @@ async def get_preference_product_detail(req: Optional[object] = None) -> dict:
     SELECT * FROM Product          
     ;"""
 
-    row = await Database.fetchrow(query)
+    row = await Database.fetch(query)
 
     dict_data = dict(row)
 
