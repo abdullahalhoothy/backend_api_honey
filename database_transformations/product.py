@@ -38,8 +38,7 @@ async def insert_product(columns: str) -> None:
 async def get_recommended_products(req: Optional[object] = None) -> dict:
     # Create table if it doesn't exist
     query = f"""
-    SELECT * FROM Product
-    WHERE id='66faa130bedf3403197df77c'            
+    SELECT * FROM Product           
     ;"""
     row = dict((await Database.fetchrow(query)).items())
     row["userrating"] = json.loads(row["userrating"])
