@@ -14,7 +14,7 @@
             ],
             "jinja": true,
             "env": {
-                "DATABASE_URL": "postgresql://scraper_user:scraper_password@localhost:5432/aqar_scraper"
+                "DATABASE_URL": "postgresql://postgres:postgres@localhost:5432/mydatabase"
             }
         }
     ]
