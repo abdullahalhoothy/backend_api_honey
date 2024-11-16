@@ -7,45 +7,45 @@ T = TypeVar("T")
 
 
 class UserRating(BaseModel):
-    rating: str
-    review: str
-    username: str
+    rating: Optional[str]
+    review: Optional[str]
+    username: Optional[str]
     description: Optional[str] = None
     userimageurl: Optional[str] = None
 
 
 class Product(BaseModel):
-    id: str
-    name: str
-    description: str
-    tagline: str
-    producturl: str
-    imageurl: str
-    ratingtext: str
+    id: Optional[str]
+    name: Optional[str]
+    description: Optional[str]
+    tagline: Optional[str]
+    producturl: Optional[str]
+    imageurl: Optional[str]
+    ratingtext: Optional[str]
     ratingvalue: Optional[str] = None
     averagerating: Optional[str] = None
-    totalratings: str
-    discountedprice: str
-    discountpercentage: str
-    originalprice: str
-    city: str
-    country: str
-    countryflagurl: str
-    userrating: UserRating
+    totalratings: Optional[str]
+    discountedprice: Optional[str]
+    discountpercentage: Optional[str]
+    originalprice: Optional[str]
+    city: Optional[str]
+    country: Optional[str]
+    countryflagurl: Optional[str]
+    userrating: Optional[str]
 
 
 class ProductDetail(BaseModel):
-    product: Product
+    products: list[Product]
 
 
 class UserReview(BaseModel):
     id: int
-    name: str
-    userProfileImageUrl: str
-    description: str
+    name: Optional[str]
+    userProfileImageUrl: Optional[str]
+    description: Optional[str]
     averageRating: Decimal
     totalRatings: int
-    time: str
+    time: Optional[str]
 
 
 class UserReviews(BaseModel):
@@ -54,8 +54,8 @@ class UserReviews(BaseModel):
 
 class FavoriteProduct(BaseModel):
     id: int
-    name: str
-    searchType: str
+    name: Optional[str]
+    searchType: Optional[str]
 
 
 class FavoriteProducts(BaseModel):
