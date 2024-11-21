@@ -1,5 +1,6 @@
 from backend_common.common_endpoints import app
 from fastapi import Depends
+from fastapi import FastAPI, File, UploadFile
 
 from api_responses.configuration import configuration_response
 from backend_common.auth import JWTBearer
@@ -11,6 +12,7 @@ from database_transformations.product import (
     get_preference_product_detail,
     get_user_reviews,
     get_favorite_products,
+    get_random_product_detail,
 )
 
 from api_responses.response_dtypes import (
@@ -57,3 +59,8 @@ async def find_your_new_favorite_product():
 @app.get("/user_reviews", dependencies=[])
 async def user_reviews():
     return await request_handling(None, None, UserReviews, get_user_reviews)
+
+
+@app.post("/upload-image/")
+async def upload_image(file: UploadFile = File(...)):
+    return await request_handling(None, None, None, get_random_product_detail)
