@@ -112,3 +112,8 @@ async def get_user_reviews(req: Optional[object] = None) -> List[Dict]:
     }
 
     return data
+
+async def get_random_product_detail():
+    query = """SELECT * FROM Product ORDER BY RANDOM() LIMIT 1;"""
+    row = await Database.fetchrow(query)
+    return row
