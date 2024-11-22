@@ -82,8 +82,6 @@ class CoffeeProductResponse(BaseModel):
 class Country(BaseModel):
     id: int
     name: str
-    imageUrl: str
-    countryIconImageUrl: str
 
 
 class CountryResponse(BaseModel):
@@ -93,8 +91,6 @@ class CountryResponse(BaseModel):
 class Region(BaseModel):
     id: int
     name: str
-    imageUrl: str
-    countryIconUrl: str
 
 
 class RegionResponse(BaseModel):
