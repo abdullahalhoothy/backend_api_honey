@@ -36,13 +36,20 @@ async def insert_product(columns: str) -> None:
 
 
 async def get_recommended_products(req: Optional[object] = None) -> dict:
-    # Create table if it doesn't exist
     query = f"""
     SELECT * FROM "schema-marketplace".products
     ;"""
-    row = dict((await Database.fetchrow(query)).items())
-    row["userrating"] = json.loads(row["userrating"])
-    data = {"justForYou": row, "bestPick": row, "bannerImageUrl": "https://"}
+    product_info = dict((await Database.fetchrow(query)).items())
+    product_info["userrating"] = json.loads(product_info["userrating"])
+
+    # fetch banner images
+    query_banner = """SELECT * FROM "schema-app_generic".banners
+    ORDER BY RANDOM()
+    LIMIT 1;"""
+    banner_item = dict((await Database.fetchrow(query_banner)).items())
+    image_banner_url = banner_item["url"]
+    
+    data = {"justForYou": product_info, "bestPick": product_info, "bannerImageUrl": image_banner_url}
     return data
 
 

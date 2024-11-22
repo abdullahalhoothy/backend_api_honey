@@ -21,8 +21,6 @@ class Product(BaseModel):
     tagline: Optional[str]
     producturl: Optional[str]
     imageurl: Optional[str]
-    ratingtext: Optional[str]
-    ratingvalue: Optional[str] = None
     averagerating: Optional[str] = None
     totalratings: Optional[str]
     discountedprice: Optional[str]
@@ -30,7 +28,6 @@ class Product(BaseModel):
     originalprice: Optional[str]
     city: Optional[str]
     country: Optional[str]
-    countryflagurl: Optional[str]
     userrating: Optional[str]
 
 
