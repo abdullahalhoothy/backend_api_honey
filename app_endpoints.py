@@ -13,6 +13,10 @@ from database_transformations.product import (
     get_user_reviews,
     get_favorite_products,
     get_random_product_detail,
+    get_coffee_bean_types,
+    get_coffee_types,
+    get_countries,
+    get_regions
 )
 
 from api_responses.response_dtypes import (
@@ -20,6 +24,10 @@ from api_responses.response_dtypes import (
     Product,
     UserReviews,
     FavoriteProducts,
+    CoffeeBeanResponse,
+    CoffeeProductResponse,
+    CountryResponse,
+    RegionResponse
 )
 
 
@@ -64,3 +72,20 @@ async def user_reviews():
 @app.post("/upload-image/")
 async def upload_image(file: UploadFile = File(...)):
     return await request_handling(None, None, None, get_random_product_detail)
+
+
+@app.get("/coffee-bean-types", dependencies=[])
+async def coffee_bean_types():
+    return await request_handling(None, None, CoffeeBeanResponse, get_coffee_bean_types)
+
+@app.get("/coffee-types", dependencies=[])
+async def coffee_types():
+    return await request_handling(None, None, CoffeeProductResponse, get_coffee_types)
+
+@app.get("/countries", dependencies=[])
+async def countries():
+    return await request_handling(None, None, CountryResponse, get_countries)
+
+@app.get("/regions", dependencies=[])
+async def regions():
+    return await request_handling(None, None, RegionResponse, get_regions)

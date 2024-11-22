@@ -57,3 +57,45 @@ class FavoriteProduct(BaseModel):
 
 class FavoriteProducts(BaseModel):
     products: List[FavoriteProduct]
+
+
+class CoffeeBean(BaseModel):
+    id: int
+    name: str
+    colorCode: str
+
+
+class CoffeeBeanResponse(BaseModel):
+    coffeeBeanTypes: List[CoffeeBean]
+
+
+class CoffeeProduct(BaseModel):
+    id: int
+    type: str
+    imageUrl: str
+
+
+class CoffeeProductResponse(BaseModel):
+    products: List[CoffeeProduct]
+
+
+class Country(BaseModel):
+    id: int
+    name: str
+    imageUrl: str
+    countryIconImageUrl: str
+
+
+class CountryResponse(BaseModel):
+    countries: List[Country]
+
+
+class Region(BaseModel):
+    id: int
+    name: str
+    imageUrl: str
+    countryIconUrl: str
+
+
+class RegionResponse(BaseModel):
+    shopByRegion: List[Region]

@@ -48,8 +48,12 @@ async def get_recommended_products(req: Optional[object] = None) -> dict:
     LIMIT 1;"""
     banner_item = dict((await Database.fetchrow(query_banner)).items())
     image_banner_url = banner_item["url"]
-    
-    data = {"justForYou": product_info, "bestPick": product_info, "bannerImageUrl": image_banner_url}
+
+    data = {
+        "justForYou": product_info,
+        "bestPick": product_info,
+        "bannerImageUrl": image_banner_url,
+    }
     return data
 
 
@@ -119,6 +123,93 @@ async def get_user_reviews(req: Optional[object] = None) -> List[Dict]:
     }
 
     return data
+
+
+async def get_coffee_bean_types(req: Optional[object] = None) -> dict:
+    data = {
+        "coffeeBeanTypes": [
+            {"id": 1, "name": "Arabica", "colorCode": "#C19A6B"},
+            {"id": 2, "name": "Robusta", "colorCode": "#8B5A2B"},
+            {"id": 3, "name": "Liberica", "colorCode": "#A0522D"},
+            {"id": 4, "name": "Excelsa", "colorCode": "#D2B48C"},
+        ]
+    }
+    return data
+
+
+async def get_coffee_types(req: Optional[object] = None) -> dict:
+    data = {
+        "products": [
+            {
+                "id": 1,
+                "type": "Espresso",
+                "imageUrl": "https://example.com/images/espresso.jpg",
+            },
+            {
+                "id": 2,
+                "type": "Latte",
+                "imageUrl": "https://example.com/images/latte.jpg",
+            },
+            {
+                "id": 3,
+                "type": "Cappuccino",
+                "imageUrl": "https://example.com/images/cappuccino.jpg",
+            },
+            {
+                "id": 4,
+                "type": "Americano",
+                "imageUrl": "https://example.com/images/americano.jpg",
+            },
+            {
+                "id": 5,
+                "type": "Mocha",
+                "imageUrl": "https://example.com/images/mocha.jpg",
+            },
+            {
+                "id": 6,
+                "type": "Macchiato",
+                "imageUrl": "https://example.com/images/macchiato.jpg",
+            },
+            {
+                "id": 7,
+                "type": "Flat White",
+                "imageUrl": "https://example.com/images/flat_white.jpg",
+            },
+        ]
+    }
+    return data
+
+
+async def get_countries(req: Optional[object] = None) -> dict:
+    # Add your countries data here
+    data = {
+        "countries": [
+            {"id": 1, "name": "United States"},
+            {"id": 2, "name": "Canada"},
+            {"id": 3, "name": "United Kingdom"},
+            {"id": 4, "name": "Australia"},
+            {"id": 5, "name": "Germany"},
+            {"id": 6, "name": "France"},
+            {"id": 7, "name": "India"},
+            {"id": 8, "name": "Japan"},
+        ]
+    }
+    return data
+
+
+async def get_regions(req: Optional[object] = None) -> dict:
+    data = {
+        "shopByRegion": [
+            {"id": 1, "name": "Ethiopia"},
+            {"id": 2, "name": "Colombia"},
+            {"id": 3, "name": "Brazil"},
+            {"id": 4, "name": "Vietnam"},
+            {"id": 5, "name": "Jamaica"},
+            {"id": 6, "name": "Guatemala"},
+        ]
+    }
+    return data
+
 
 async def get_random_product_detail():
     query = """SELECT * FROM Product ORDER BY RANDOM() LIMIT 1;"""
