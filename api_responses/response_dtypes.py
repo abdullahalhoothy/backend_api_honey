@@ -28,7 +28,7 @@ class Product(BaseModel):
     originalprice: Optional[str]
     city: Optional[str]
     country: Optional[str]
-    userrating: Optional[str]
+    userrating: UserRating
 
 
 class ProductDetail(BaseModel):

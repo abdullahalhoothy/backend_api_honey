@@ -61,6 +61,8 @@ async def get_preference_product_detail():
     query = """SELECT * FROM "schema-marketplace".products;"""
     rows = await Database.fetch(query)
     products = list(map(dict, rows))
+    for product in products:
+        product["userrating"] = json.loads(product["userrating"])
     return {"products": products}
 
 
