@@ -37,7 +37,7 @@ async def insert_product(columns: str) -> None:
 
 async def get_recommended_products(req: Optional[object] = None) -> dict:
     query = f"""
-    SELECT * FROM "schema-marketplace".products
+    SELECT * FROM "schema_marketplace".products
     ;"""
     product_info = dict((await Database.fetchrow(query)).items())
     product_info["userrating"] = json.loads(product_info["userrating"])
@@ -58,7 +58,7 @@ async def get_recommended_products(req: Optional[object] = None) -> dict:
 
 
 async def get_preference_product_detail():
-    query = """SELECT * FROM "schema-marketplace".products;"""
+    query = """SELECT * FROM "schema_marketplace".products;"""
     rows = await Database.fetch(query)
     products = list(map(dict, rows))
     for product in products:
