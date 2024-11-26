@@ -43,10 +43,11 @@ async def get_recommended_products(req: Optional[object] = None) -> dict:
     product_info["userrating"] = json.loads(product_info["userrating"])
 
     # fetch banner images
-    query_banner = """SELECT * FROM "schema-app_generic".banners
+    query_banner = """SELECT * FROM "schema_app_generic".banners
     ORDER BY RANDOM()
     LIMIT 1;"""
-    banner_item = dict((await Database.fetchrow(query_banner)).items())
+    data = await Database.fetchrow(query_banner)
+    banner_item = dict(data.items())
     image_banner_url = banner_item["url"]
 
     data = {
