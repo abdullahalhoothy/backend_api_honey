@@ -146,37 +146,37 @@ async def get_coffee_types(req: Optional[object] = None) -> dict:
             {
                 "id": 1,
                 "type": "Espresso",
-                "imageUrl": "https://example.com/images/espresso.jpg",
+                "imageUrl": "hhttps://storage.googleapis.com/vivi_app/postgreSQL/dbo-coffee/raw_schema_app_generic/banners/9.jpeg",
             },
             {
                 "id": 2,
                 "type": "Latte",
-                "imageUrl": "https://example.com/images/latte.jpg",
+                "imageUrl": "https://storage.googleapis.com/vivi_app/postgreSQL/dbo-coffee/raw_schema_app_generic/banners/9.jpeg",
             },
             {
                 "id": 3,
                 "type": "Cappuccino",
-                "imageUrl": "https://example.com/images/cappuccino.jpg",
+                "imageUrl": "https://storage.googleapis.com/vivi_app/postgreSQL/dbo-coffee/raw_schema_app_generic/banners/10.jpeg",
             },
             {
                 "id": 4,
                 "type": "Americano",
-                "imageUrl": "https://example.com/images/americano.jpg",
+                "imageUrl": "https://storage.googleapis.com/vivi_app/postgreSQL/dbo-coffee/raw_schema_app_generic/banners/10.jpeg",
             },
             {
                 "id": 5,
                 "type": "Mocha",
-                "imageUrl": "https://example.com/images/mocha.jpg",
+                "imageUrl": "https://storage.googleapis.com/vivi_app/postgreSQL/dbo-coffee/raw_schema_app_generic/banners/10.jpeg",
             },
             {
                 "id": 6,
                 "type": "Macchiato",
-                "imageUrl": "https://example.com/images/macchiato.jpg",
+                "imageUrl": "https://storage.googleapis.com/vivi_app/postgreSQL/dbo-coffee/raw_schema_app_generic/banners/8.jpeg",
             },
             {
                 "id": 7,
                 "type": "Flat White",
-                "imageUrl": "https://example.com/images/flat_white.jpg",
+                "imageUrl": "https://storage.googleapis.com/vivi_app/postgreSQL/dbo-coffee/raw_schema_app_generic/banners/8.jpeg",
             },
         ]
     }
@@ -187,14 +187,46 @@ async def get_countries(req: Optional[object] = None) -> dict:
     # Add your countries data here
     data = {
         "countries": [
-            {"id": 1, "name": "United States"},
-            {"id": 2, "name": "Canada"},
-            {"id": 3, "name": "United Kingdom"},
-            {"id": 4, "name": "Australia"},
-            {"id": 5, "name": "Germany"},
-            {"id": 6, "name": "France"},
-            {"id": 7, "name": "India"},
-            {"id": 8, "name": "Japan"},
+            {
+                "id": 1,
+                "name": "United States",
+                "imageUrl": "https://storage.googleapis.com/vivi_app/postgreSQL/dbo-coffee/raw_schema_app_generic/banners/9.jpeg",
+            },
+            {
+                "id": 2,
+                "name": "Canada",
+                "imageUrl": "https://storage.googleapis.com/vivi_app/postgreSQL/dbo-coffee/raw_schema_app_generic/banners/9.jpeg",
+            },
+            {
+                "id": 3,
+                "name": "United Kingdom",
+                "imageUrl": "https://storage.googleapis.com/vivi_app/postgreSQL/dbo-coffee/raw_schema_app_generic/banners/10.jpeg",
+            },
+            {
+                "id": 4,
+                "name": "Australia",
+                "imageUrl": "https://storage.googleapis.com/vivi_app/postgreSQL/dbo-coffee/raw_schema_app_generic/banners/10.jpeg",
+            },
+            {
+                "id": 5,
+                "name": "Germany",
+                "imageUrl": "https://storage.googleapis.com/vivi_app/postgreSQL/dbo-coffee/raw_schema_app_generic/banners/10.jpeg",
+            },
+            {
+                "id": 6,
+                "name": "France",
+                "imageUrl": "https://storage.googleapis.com/vivi_app/postgreSQL/dbo-coffee/raw_schema_app_generic/banners/10.jpeg",
+            },
+            {
+                "id": 7,
+                "name": "India",
+                "imageUrl": "https://storage.googleapis.com/vivi_app/postgreSQL/dbo-coffee/raw_schema_app_generic/banners/8.jpeg",
+            },
+            {
+                "id": 8,
+                "name": "Japan",
+                "imageUrl": "https://storage.googleapis.com/vivi_app/postgreSQL/dbo-coffee/raw_schema_app_generic/banners/8.jpeg",
+            },
         ]
     }
     return data
@@ -203,12 +235,36 @@ async def get_countries(req: Optional[object] = None) -> dict:
 async def get_regions(req: Optional[object] = None) -> dict:
     data = {
         "shopByRegion": [
-            {"id": 1, "name": "Ethiopia"},
-            {"id": 2, "name": "Colombia"},
-            {"id": 3, "name": "Brazil"},
-            {"id": 4, "name": "Vietnam"},
-            {"id": 5, "name": "Jamaica"},
-            {"id": 6, "name": "Guatemala"},
+            {
+                "id": 1,
+                "name": "Ethiopia",
+                "imageUrl": "https://storage.googleapis.com/vivi_app/postgreSQL/dbo-coffee/raw_schema_app_generic/banners/8.jpeg",
+            },
+            {
+                "id": 2,
+                "name": "Colombia",
+                "imageUrl": "https://storage.googleapis.com/vivi_app/postgreSQL/dbo-coffee/raw_schema_app_generic/banners/8.jpeg",
+            },
+            {
+                "id": 3,
+                "name": "Brazil",
+                "imageUrl": "https://storage.googleapis.com/vivi_app/postgreSQL/dbo-coffee/raw_schema_app_generic/banners/10.jpeg",
+            },
+            {
+                "id": 4,
+                "name": "Vietnam",
+                "imageUrl": "https://storage.googleapis.com/vivi_app/postgreSQL/dbo-coffee/raw_schema_app_generic/banners/10.jpeg",
+            },
+            {
+                "id": 5,
+                "name": "Jamaica",
+                "imageUrl": "https://storage.googleapis.com/vivi_app/postgreSQL/dbo-coffee/raw_schema_app_generic/banners/10.jpeg",
+            },
+            {
+                "id": 6,
+                "name": "Guatemala",
+                "imageUrl": "https://storage.googleapis.com/vivi_app/postgreSQL/dbo-coffee/raw_schema_app_generic/banners/9.jpeg",
+            },
         ]
     }
     return data
