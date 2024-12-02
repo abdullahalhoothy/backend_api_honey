@@ -97,3 +97,33 @@ class Region(BaseModel):
 
 class RegionResponse(BaseModel):
     shopByRegion: List[Region]
+
+
+class CoffeeDataResponse(BaseModel):
+    coffeeData: dict
+
+
+class ProductFiltersRequest(BaseModel):
+    typeIds: List[int]
+    minRatingValue: str
+    minPrice: str
+    maxPrice: str
+    countryNames: List[str]
+    regionIds: List[int]
+    rawMaterialIds: List[int]
+    styleIds: List[int]
+    sizeIds: List[int]
+
+class UserReviewRequest(BaseModel):
+    id: int
+
+class SingleUserReview(Product):
+    price: Optional[str]
+    countryflagurl: Optional[str]
+    
+    class Config:
+        # Allow population by field name for flexibility
+        allow_population_by_field_name = True
+
+class UserReviewsRequest(BaseModel):
+    type: str = Field(..., description="Can be helpful/recent/all")

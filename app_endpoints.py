@@ -16,7 +16,10 @@ from database_transformations.product import (
     get_coffee_bean_types,
     get_coffee_types,
     get_countries,
-    get_regions
+    get_regions,
+    get_product_filters,
+    get_filtered_products,
+    get_single_user_review
 )
 
 from api_responses.response_dtypes import (
@@ -27,7 +30,12 @@ from api_responses.response_dtypes import (
     CoffeeBeanResponse,
     CoffeeProductResponse,
     CountryResponse,
-    RegionResponse
+    RegionResponse,
+    CoffeeDataResponse,
+    ProductFiltersRequest,
+    UserReviewRequest,
+    SingleUserReview,
+    UserReviewsRequest
 )
 
 
@@ -64,9 +72,9 @@ async def find_your_new_favorite_product():
     return await request_handling(None, None, FavoriteProducts, get_favorite_products)
 
 
-@app.get("/user_reviews", dependencies=[])
-async def user_reviews():
-    return await request_handling(None, None, UserReviews, get_user_reviews)
+@app.post("/user_reviews", dependencies=[])
+async def user_reviews(request: UserReviewsRequest):
+    return await request_handling(request, UserReviewsRequest, UserReviews, get_user_reviews)
 
 
 @app.post("/upload-image/")
@@ -89,3 +97,15 @@ async def countries():
 @app.get("/regions", dependencies=[])
 async def regions():
     return await request_handling(None, None, RegionResponse, get_regions)
+
+@app.get("/product-filters", dependencies=[])
+async def product_filters():
+    return await request_handling(None, None, CoffeeDataResponse, get_product_filters)
+
+@app.post("/filtered-products", dependencies=[])
+async def filtered_products(request: ProductFiltersRequest):
+    return await request_handling(request, ProductFiltersRequest, ProductDetail, get_filtered_products)
+
+@app.post("/user-review", dependencies=[])
+async def user_review(request: UserReviewRequest):
+    return await request_handling(request, UserReviewRequest, SingleUserReview, get_single_user_review)
