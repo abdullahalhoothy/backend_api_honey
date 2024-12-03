@@ -41,6 +41,7 @@ async def get_recommended_products(req: Optional[object] = None) -> dict:
     ;"""
     product_info = dict((await Database.fetchrow(query)).items())
     product_info["userrating"] = json.loads(product_info["userrating"])
+    product_info["userrating"]["review_id"] = "3422"
 
     # fetch banner images
     query_banner = """SELECT * FROM "schema_app_generic".banners
@@ -64,6 +65,7 @@ async def get_preference_product_detail():
     products = list(map(dict, rows))
     for product in products:
         product["userrating"] = json.loads(product["userrating"])
+        product["userrating"]["review_id"] = "3422"
     return {"products": products}
 
 
@@ -277,16 +279,16 @@ async def get_product_filters(req: Optional[object] = None) -> dict:
     data = {
         "coffeeData": {
             "coffeeTypes": [
-                {"id": 1, "name": "Espresso"},
-                {"id": 2, "name": "Latte"},
-                {"id": 3, "name": "Cappuccino"},
-                {"id": 4, "name": "Americano"},
+                {"id": 1, "name": "Espresso", "count": 40},
+                {"id": 2, "name": "Latte", "count": 40},
+                {"id": 3, "name": "Cappuccino", "count": 40},
+                {"id": 4, "name": "Americano", "count": 40},
             ],
             "coffeeBeanTypes": [
-                {"id": 1, "name": "Arabica"},
-                {"id": 2, "name": "Robusta"},
-                {"id": 3, "name": "Liberica"},
-                {"id": 4, "name": "Excelsa"},
+                {"id": 1, "name": "Arabica", "count": 40},
+                {"id": 2, "name": "Robusta", "count": 40},
+                {"id": 3, "name": "Liberica", "count": 40},
+                {"id": 4, "name": "Excelsa", "count": 40},
             ],
             "countries": [
                 {"id": 1, "name": "Brazil", "count": 50},
@@ -300,15 +302,15 @@ async def get_product_filters(req: Optional[object] = None) -> dict:
                 {"id": 3, "name": "Asia", "count": 40},
             ],
             "coffeeStyles": [
-                {"id": 1, "name": "Hot"},
-                {"id": 2, "name": "Cold"},
-                {"id": 3, "name": "Iced"},
-                {"id": 4, "name": "Blended"},
+                {"id": 1, "name": "Hot", "count": 40},
+                {"id": 2, "name": "Cold", "count": 40},
+                {"id": 3, "name": "Iced", "count": 40},
+                {"id": 4, "name": "Blended", "count": 40},
             ],
             "sizes": [
-                {"id": 1, "sizeValue": 0.375},
-                {"id": 2, "sizeValue": 0.75},
-                {"id": 3, "sizeValue": 1.0},
+                {"id": 1, "sizeValue": 0.375, "count": 40},
+                {"id": 2, "sizeValue": 0.75, "count": 40},
+                {"id": 3, "sizeValue": 1.0, "count": 40},
             ],
         }
     }
@@ -333,6 +335,7 @@ async def get_filtered_products(req: Optional[object] = None) -> dict:
                 "city": "Barolo",
                 "country": "Italy",
                 "userrating": {
+                    "review_id": "3422",
                     "rating": "4.0",
                     "review": "Good product",
                     "username": "Default Reviewer",
@@ -355,6 +358,7 @@ async def get_filtered_products(req: Optional[object] = None) -> dict:
                 "city": "Barolo",
                 "country": "Italy",
                 "userrating": {
+                    "review_id": "3422",
                     "rating": "4.0",
                     "review": "Good product",
                     "username": "Default Reviewer",
@@ -377,6 +381,7 @@ async def get_filtered_products(req: Optional[object] = None) -> dict:
                 "city": "Barolo",
                 "country": "Italy",
                 "userrating": {
+                    "review_id": "3422",
                     "rating": "4.0",
                     "review": "Good product",
                     "username": "Default Reviewer",
@@ -399,6 +404,7 @@ async def get_filtered_products(req: Optional[object] = None) -> dict:
                 "city": "Barolo",
                 "country": "Italy",
                 "userrating": {
+                    "review_id": "3422",
                     "rating": "4.0",
                     "review": "Good product",
                     "username": "Default Reviewer",
@@ -421,6 +427,7 @@ async def get_filtered_products(req: Optional[object] = None) -> dict:
                 "city": "Barolo",
                 "country": "Italy",
                 "userrating": {
+                    "review_id": "3422",
                     "rating": "4.0",
                     "review": "Good product",
                     "username": "Default Reviewer",
@@ -443,6 +450,7 @@ async def get_filtered_products(req: Optional[object] = None) -> dict:
                 "city": "Barolo",
                 "country": "Italy",
                 "userrating": {
+                    "review_id": "3422",
                     "rating": "4.0",
                     "review": "Good product",
                     "username": "Default Reviewer",
@@ -457,26 +465,26 @@ async def get_filtered_products(req: Optional[object] = None) -> dict:
 
 async def get_single_user_review(req: Optional[object] = None) -> dict:
     data = {
-                "id": "e81bbd7cd6bb6dd0fa6a06ec69ccc144",
-                "name": "Nescafe Classic Instant Coffee Jar 95g",
-                "description": "Nescafé Classic Instant Coffee offers a rich, robust, and aromatic coffee experience, made from 100% pure coffee beans. Carefully selected and roasted to perfection, this instant coffee is ideal for those who enjoy a bold and strong flavor. It is designed to deliver a consistent and rich cup of coffee with a smooth finish, providing the perfect start to your day or a refreshing break anytime.\n",
-                "tagline": "Brand: Nescafe\nProduct Name: Classic Instant Coffee\nPackaging: Jar\nNet Weight: 95g\nIngredients: 100% instant coffee.\nFlavor Profile:\nClassic and balanced flavor with a smooth finish.\nRich aroma that awakens the senses.\nPreparation Method:\nAdd 1-2 teaspoons of instant coffee to a cup.\nPour hot water and stir well until dissolved. Enjoy your coffee!\nVersatility:\nIdeal for everyday coffee consumption.\nCan be enhanced with milk, cream, or sugar according to personal preference.",
-                "producturl": "https://storage.googleapis.com/vivi_app/postgreSQL/dbo-coffee/raw_schema_marketplace/product_images/106.png",
-                "imageurl": "https://storage.googleapis.com/vivi_app/postgreSQL/dbo-coffee/raw_schema_marketplace/product_images/109.png",
-                "averagerating": "4.2",
-                "totalratings": "500",
-                "discountedprice": "17.425",
-                "discountpercentage": "15%",
-                "originalprice": "20.5",
-                "city": "Barolo",
-                "country": "Italy",
-                "userrating": {
-                    "rating": "4.0",
-                    "review": "Good product",
-                    "username": "Default Reviewer",
-                    "description": "Clear deep ruby in color with medium intensity",
-                    "userimageurl": "default_image_url",
-                },
-            
+        "id": "e81bbd7cd6bb6dd0fa6a06ec69ccc144",
+        "name": "Nescafe Classic Instant Coffee Jar 95g",
+        "description": "Nescafé Classic Instant Coffee offers a rich, robust, and aromatic coffee experience, made from 100% pure coffee beans. Carefully selected and roasted to perfection, this instant coffee is ideal for those who enjoy a bold and strong flavor. It is designed to deliver a consistent and rich cup of coffee with a smooth finish, providing the perfect start to your day or a refreshing break anytime.\n",
+        "tagline": "Brand: Nescafe\nProduct Name: Classic Instant Coffee\nPackaging: Jar\nNet Weight: 95g\nIngredients: 100% instant coffee.\nFlavor Profile:\nClassic and balanced flavor with a smooth finish.\nRich aroma that awakens the senses.\nPreparation Method:\nAdd 1-2 teaspoons of instant coffee to a cup.\nPour hot water and stir well until dissolved. Enjoy your coffee!\nVersatility:\nIdeal for everyday coffee consumption.\nCan be enhanced with milk, cream, or sugar according to personal preference.",
+        "producturl": "https://storage.googleapis.com/vivi_app/postgreSQL/dbo-coffee/raw_schema_marketplace/product_images/106.png",
+        "imageurl": "https://storage.googleapis.com/vivi_app/postgreSQL/dbo-coffee/raw_schema_marketplace/product_images/109.png",
+        "averagerating": "4.2",
+        "totalratings": "500",
+        "discountedprice": "17.425",
+        "discountpercentage": "15%",
+        "originalprice": "20.5",
+        "city": "Barolo",
+        "country": "Italy",
+        "userrating": {
+            "review_id": "3422",
+            "rating": "4.0",
+            "review": "Good product",
+            "username": "Default Reviewer",
+            "description": "Clear deep ruby in color with medium intensity",
+            "userimageurl": "default_image_url",
+        },
     }
     return data

@@ -7,6 +7,7 @@ T = TypeVar("T")
 
 
 class UserRating(BaseModel):
+    review_id:str
     rating: Optional[str]
     review: Optional[str]
     username: Optional[str]

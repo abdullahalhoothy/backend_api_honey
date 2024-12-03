@@ -99,8 +99,8 @@ async def regions():
     return await request_handling(None, None, RegionResponse, get_regions)
 
 @app.get("/product-filters", dependencies=[])
-async def product_filters():
-    return await request_handling(None, None, CoffeeDataResponse, get_product_filters)
+async def product_filters(request: ProductFiltersRequest):
+    return await request_handling(request, ProductFiltersRequest, CoffeeDataResponse, get_product_filters)
 
 @app.post("/filtered-products", dependencies=[])
 async def filtered_products(request: ProductFiltersRequest):
