@@ -116,7 +116,7 @@ class ProductFiltersRequest(BaseModel):
     sizeIds: List[int]
 
 class UserReviewRequest(BaseModel):
-    id: int
+    review_id: int
 
 class SingleUserReview(Product):
     price: Optional[str]
