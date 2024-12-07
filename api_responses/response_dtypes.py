@@ -16,7 +16,7 @@ class UserRating(BaseModel):
 
 
 class Product(BaseModel):
-    id: Optional[str]
+    product_id: Optional[str]
     name: Optional[str]
     description: Optional[str]
     tagline: Optional[str]
@@ -37,7 +37,7 @@ class ProductDetail(BaseModel):
 
 
 class UserReview(BaseModel):
-    id: int
+    review_id: int
     name: Optional[str]
     userProfileImageUrl: Optional[str]
     description: Optional[str]
@@ -51,7 +51,7 @@ class UserReviews(BaseModel):
 
 
 class FavoriteProduct(BaseModel):
-    id: int
+    product_id: int
     name: Optional[str]
     searchType: Optional[str]
 
@@ -71,7 +71,7 @@ class CoffeeBeanResponse(BaseModel):
 
 
 class CoffeeProduct(BaseModel):
-    id: int
+    product_id: int
     type: str
     imageUrl: str
 
@@ -119,8 +119,8 @@ class UserReviewRequest(BaseModel):
     review_id: int
 
 class SingleUserReview(Product):
-    price: Optional[str]
-    countryflagurl: Optional[str]
+    price: Optional[str] = None
+    countryflagurl: Optional[str] = None
     
     class Config:
         # Allow population by field name for flexibility
