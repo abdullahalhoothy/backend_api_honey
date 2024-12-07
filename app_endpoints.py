@@ -98,7 +98,7 @@ async def countries():
 async def regions():
     return await request_handling(None, None, RegionResponse, get_regions)
 
-@app.get("/product-filters", dependencies=[])
+@app.post("/product-filters", dependencies=[])
 async def product_filters(request: ProductFiltersRequest):
     return await request_handling(request, ProductFiltersRequest, CoffeeDataResponse, get_product_filters)
 
