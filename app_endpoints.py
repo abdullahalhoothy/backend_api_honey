@@ -12,6 +12,7 @@ from backend_common.auth import JWTBearer
 from backend_common.database import Database
 from backend_common.request_processor import request_handling
 from backend_common.gbucket import upload_file_to_google_cloud_bucket
+from typing import Optional
 from database_transformations.product import (
     create_product_table,
     get_recommended_products,
@@ -119,15 +120,16 @@ async def user_review(request: UserReviewRequest):
 
 
 @app.post("/full-product/")
-async def upload_image(product_front_image: UploadFile, product_back_image: UploadFile = File(...),
+async def upload_image(product_front_image: UploadFile, product_back_image: Optional[UploadFile] = File(None),
                        req : str = Form(...)):
     # Upload front_image to Google Cloud Storage
     req = json.loads(req)
     Product(**req)
     front_image_url = upload_file_to_google_cloud_bucket(product_front_image)
-    back_image_url = upload_file_to_google_cloud_bucket(product_back_image)
+    if product_back_image:
+        back_image_url = upload_file_to_google_cloud_bucket(product_back_image)
+        req['additionalDetail'].update(productFrontImageUrl=front_image_url, productBackImageUrl=back_image_url, )
     # Save metadata and URLs to the database
-    req['additionalDetail'].update(productFrontImageUrl=front_image_url, productBackImageUrl=back_image_url, )
     req['userrating'] = json.dumps(req['userrating'])
     req['additionalDetail'] = json.dumps(req['additionalDetail'])
     return await request_handling(req, None, None, insert_product_in_db)
