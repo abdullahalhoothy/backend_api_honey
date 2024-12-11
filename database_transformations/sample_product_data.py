@@ -22,7 +22,8 @@ SAMPLE_PRODUCT = [
         "review": "50",
         "username": "Barolo",
         "userimageurl": "Italy"
-      }'''
+      }''',
+      "additionalDetail": '''{}'''
   },
     {
       "id": "66faa130bedf3403197df77d",
@@ -47,6 +48,7 @@ SAMPLE_PRODUCT = [
         "review": "",
         "username": "Name of reviewer",
         "userimageurl": "send image url"
-      }'''
-  }
+      }''',
+      "additionalDetail": '''{}'''
+    }
 ]

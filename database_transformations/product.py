@@ -30,9 +30,27 @@ async def insert_product(columns: str) -> None:
     query = f"""
         INSERT INTO Product ({columns})  
             VALUES({placeholders})
-        On CONFLICT(id) DO NOTHING;
+        On CONFLICT(product_id) DO NOTHING;
         """
     await Database.execute_many(query, entries)
+
+async def insert_product_in_db(req: dict) -> dict:
+    # Create table if it doesn't exist
+    product = req
+    columns, placeholders, values = '', '', []
+    for index, name in enumerate(product.keys(), start=1):
+        placeholders += f"${index}, "
+        columns += f"{name}, "
+        values.append(product[name])
+    placeholders = placeholders.rstrip(", ")
+    columns = columns.rstrip(", ")
+    query = f"""
+        INSERT INTO "schema_marketplace".products ({columns})  
+            VALUES({placeholders})
+        On CONFLICT(product_id) DO NOTHING;
+        """
+    await Database.execute_many(query, [values])
+    return {}
 
 
 async def get_recommended_products(req: Optional[object] = None) -> dict:
@@ -388,6 +406,111 @@ async def get_filtered_products(req: Optional[object] = None) -> dict:
                     "description": "Clear deep ruby in color with medium intensity",
                     "userimageurl": "default_image_url",
                 },
+                "additionalDetail": {
+                    "sellerRating": {
+                        "userName": "Michael Millder",
+                        "userRatings": 328
+                    },
+                    "summary": {
+                        "highlights": [
+                            "Great value for money, similar vivi usually costs about 2 times as much",
+                            "Among top 2% of all vivi in the world"
+                        ],
+                        "facts": "100% hygienic"
+                    },
+                    "tasteCharacteristics": {
+                        "totalReviews": 2563,
+                        "characteristics": {
+                            "Characteristic_1": {
+                                "start": "Light",
+                                "percentage": "60%",
+                                "end": "Bold"
+                            },
+                            "Characteristic_2": {
+                                "start": "Small",
+                                "percentage": "60%",
+                                "end": "Large"
+                            },
+                            "Characteristic_3": {
+                                "start": "Dim",
+                                "percentage": "60%",
+                                "end": "Bright"
+                            },
+                            "Characteristic_4": {
+                                "start": "Small",
+                                "percentage": "60%",
+                                "end": "Large"
+                            }
+                        }
+                    },
+                    "whatPeopleTalkAbout": {
+                        "talkTags_1": [
+                            "Citrus, lemon, grapefruit",
+                            "57 mentions of citrus fruit notes"
+                        ],
+                        "talkTags_2": [
+                            "Peach, apricot, pear",
+                            "37 mentions of tree fruit notes"
+                        ],
+                        "talkTags_3": [
+                            "Stone, Honey, minerals",
+                            "25 mentions of earthy notes"
+                        ]
+                    },
+                    "reviews": {
+                        "helpful": [
+                            {
+                                "consumerName": "John White",
+                                "outOf5Rating": "4.9",
+                                "description": ""
+                            }
+                        ],
+                        "recent": [
+                            {
+                                "consumerName": "John White",
+                                "outOf5Rating": "4.9",
+                                "description": ""
+                            }
+                        ]
+                    },
+                    "productRanking": [
+                        {
+                            "name": "World",
+                            "percentage": "70%,"
+                        },
+                        {
+                            "name": "Nepal Valley",
+                            "percentage": "70%,"
+                        }
+                    ],
+                    "productOriginStory": "California is known primarily for its cabinet and chardonnay but they are also producing some really lovely savonian ....",
+                    "pairsWellWith": [
+                        "ShellFish",
+                        "Vegetarian",
+                        "Goat's Milk Cheese",
+                        "Fettuccine Alfredo"
+                    ],
+                    "producerDetails": {
+                        "producerType": "Coffee",
+                        "producerName": "Borgogno",
+                        "numProducts": "39",
+                        "cityOverallRanking": "4.5",
+                        "cityTotalRating": "86944",
+                        "cityName": "Piemonte",
+                        "countryName": "Italy",
+                        "producerAddress": "277 bedfrord ave broklyne Ny 11211, usa"
+                    },
+                    "vintageComparison": {
+                        "recent": {
+                            "2020": {
+                                "ratingValue": "4.0",
+                                "totalRatings": "344"
+                            }
+                        },
+                        "bestPrice": {},
+                        "topRating": {}
+                    }
+                }
             },
             {
                 "product_id": "2b579cbecdccb3a34350514ba5338252",
