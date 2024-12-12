@@ -129,3 +129,9 @@ class SingleUserReview(Product):
 
 class UserReviewsRequest(BaseModel):
     type: str = Field(..., description="Can be helpful/recent/all")
+
+class ProductReviewRequest(BaseModel):
+    product_id: str
+    consumerName: str
+    outOf5Rating: str
+    description: str

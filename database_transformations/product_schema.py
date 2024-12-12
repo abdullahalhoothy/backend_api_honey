@@ -18,3 +18,13 @@ SCHEMA = {
     "userRating": "JSONB",
     "additionalDetail": "JSONB",
 }
+
+
+REVIEW = {
+    "review_id": "TEXT PRIMARY KEY UNIQUE",
+    "consumerName": "TEXT",
+    "outOf5Rating": "TEXT",
+    "description": "TEXT",
+    "product_id": "TEXT",
+    "CONSTRAINT fk_product": 'FOREIGN KEY (product_id) REFERENCES "schema_marketplace".products(product_id)',
+}
