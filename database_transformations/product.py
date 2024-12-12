@@ -1,10 +1,10 @@
 from typing import Optional
 import json
 from backend_common.database import Database
-from database_transformations.product_schema import SCHEMA
+from database_transformations.product_schema import SCHEMA, REVIEW
 from database_transformations.sample_product_data import SAMPLE_PRODUCT
 from typing import List, Dict
-
+import uuid
 
 async def create_product_table() -> None:
     # Create table if it doesn't exist
@@ -33,6 +33,34 @@ async def insert_product(columns: str) -> None:
         On CONFLICT(product_id) DO NOTHING;
         """
     await Database.execute_many(query, entries)
+
+
+async def create_review_table() -> None:
+    # Create table if it doesn't exist
+
+    columns = ", ".join([f"{k} {v}" for k, v in REVIEW.items()])
+    create_table_query = f"""
+    CREATE TABLE IF NOT EXISTS "schema_marketplace".reviews (
+            {columns}
+    );
+    """
+    await Database.execute(create_table_query)
+
+
+async def insert_review(req) -> dict:
+    # Insert entry intro table
+    await create_review_table()
+    entry = {'review_id': uuid.uuid4().hex, 'consumerName': req.consumerName, 'outOf5Rating': req.outOf5Rating,
+             'description': req.description, 'product_id': req.product_id}
+    columns = ", ".join(entry.keys())
+    placeholders = ", ".join([f"${i + 1}" for i in range(len(entry))])
+    query = f"""
+        INSERT INTO "schema_marketplace".reviews ({columns})  
+            VALUES({placeholders});
+        """
+    await Database.execute_many(query, [list(entry.values())])
+    return {}
+
 
 async def insert_product_in_db(req: dict) -> dict:
     # Create table if it doesn't exist

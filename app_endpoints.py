@@ -28,7 +28,8 @@ from database_transformations.product import (
     get_product_filters,
     get_filtered_products,
     get_single_user_review,
-    insert_product_in_db
+    insert_product_in_db,
+    insert_review,
 )
 
 from api_responses.response_dtypes import (
@@ -44,7 +45,8 @@ from api_responses.response_dtypes import (
     ProductFiltersRequest,
     UserReviewRequest,
     SingleUserReview,
-    UserReviewsRequest
+    UserReviewsRequest,
+    ProductReviewRequest
 )
 
 
@@ -140,3 +142,6 @@ async def upload_image(product_front_image: UploadFile, product_back_image: Opti
     return await request_handling(req, None, None, insert_product_in_db)
 
 
+@app.post("/create-review", dependencies=[])
+async def create_review(request: ProductReviewRequest):
+    return await request_handling(request, ProductReviewRequest, None, insert_review)
