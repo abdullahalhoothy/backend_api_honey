@@ -30,6 +30,7 @@ class Product(BaseModel):
     city: Optional[str]
     country: Optional[str]
     userrating: UserRating
+    additionalDetail: dict
 
 
 class ProductDetail(BaseModel):
