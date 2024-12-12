@@ -8,6 +8,7 @@ from fastapi import FastAPI, File, UploadFile, Form
 
 from api_responses.configuration import configuration_response
 from backend_common.common_config import CONF
+from config_factory import CONF as CONF_LOCAL
 from backend_common.auth import JWTBearer
 from backend_common.database import Database
 from backend_common.request_processor import request_handling
@@ -125,9 +126,13 @@ async def upload_image(product_front_image: UploadFile, product_back_image: Opti
     # Upload front_image to Google Cloud Storage
     req = json.loads(req)
     Product(**req)
-    front_image_url = upload_file_to_google_cloud_bucket(product_front_image)
+    front_image_url = upload_file_to_google_cloud_bucket(product_front_image, CONF_LOCAL.google_product_bucket_name,
+                                                         CONF_LOCAL.google_product_bucket_path,
+                                                         CONF_LOCAL.google_bucket_credentials_json_path)
     if product_back_image:
-        back_image_url = upload_file_to_google_cloud_bucket(product_back_image)
+        back_image_url = upload_file_to_google_cloud_bucket(product_front_image, CONF_LOCAL.google_product_bucket_name,
+                                                             CONF_LOCAL.google_product_bucket_path,
+                                                             CONF_LOCAL.google_bucket_credentials_json_path)
         req['additionalDetail'].update(productFrontImageUrl=front_image_url, productBackImageUrl=back_image_url, )
     # Save metadata and URLs to the database
     req['userrating'] = json.dumps(req['userrating'])
