@@ -131,16 +131,14 @@ async def upload_image(product_front_image: UploadFile, product_back_image: Opti
     front_image_url = upload_file_to_google_cloud_bucket(product_front_image, CONF_LOCAL.google_product_bucket_name,
                                                          CONF_LOCAL.google_product_bucket_path,
                                                          CONF_LOCAL.google_bucket_credentials_json_path)
-    back_image_url = None
     if product_back_image:
-        back_image_url = upload_file_to_google_cloud_bucket(product_back_image, CONF_LOCAL.google_product_bucket_name,
+        back_image_url = upload_file_to_google_cloud_bucket(product_front_image, CONF_LOCAL.google_product_bucket_name,
                                                              CONF_LOCAL.google_product_bucket_path,
                                                              CONF_LOCAL.google_bucket_credentials_json_path)
-
-    req.update({
-        "Image 1 Link": front_image_url,
-        "Image 2 Link": back_image_url
-    })
+        req['additionalDetail'].update(productFrontImageUrl=front_image_url, productBackImageUrl=back_image_url, )
+    # Save metadata and URLs to the database
+    req['userrating'] = json.dumps(req['userrating'])
+    req['additionalDetail'] = json.dumps(req['additionalDetail'])
     return await request_handling(req, None, None, insert_product_in_db)
 
 
