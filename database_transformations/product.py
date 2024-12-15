@@ -68,7 +68,7 @@ async def insert_product_in_db(req: dict) -> dict:
     columns, placeholders, values = '', '', []
     for index, name in enumerate(product.keys(), start=1):
         placeholders += f"${index}, "
-        columns += f"{name}, "
+        columns += f'"{name}", '
         values.append(product[name])
     placeholders = placeholders.rstrip(", ")
     columns = columns.rstrip(", ")
