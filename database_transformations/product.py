@@ -388,6 +388,7 @@ async def get_filtered_products(req: Optional[object] = None) -> dict:
                     "description": "Clear deep ruby in color with medium intensity",
                     "userimageurl": "default_image_url",
                 },
+                "additionalDetail": {}
             },
             {
                 "product_id": "a848b13fa88a4cf5fb96e9e2a1827f0a",
@@ -411,6 +412,7 @@ async def get_filtered_products(req: Optional[object] = None) -> dict:
                     "description": "Clear deep ruby in color with medium intensity",
                     "userimageurl": "default_image_url",
                 },
+                "additionalDetail": {}
             },
             {
                 "product_id": "4ed95bc7fcd498bfa70ee0205afc3aae",
@@ -562,6 +564,7 @@ async def get_filtered_products(req: Optional[object] = None) -> dict:
                     "description": "Clear deep ruby in color with medium intensity",
                     "userimageurl": "default_image_url",
                 },
+                "additionalDetail": {}
             },
             {
                 "product_id": "744444889fbb91770001b4c6605497e1",
@@ -585,6 +588,7 @@ async def get_filtered_products(req: Optional[object] = None) -> dict:
                     "description": "Clear deep ruby in color with medium intensity",
                     "userimageurl": "default_image_url",
                 },
+                "additionalDetail": {}
             },
             {
                 "product_id": "e81bbd7cd6bb6dd0fa6a06ec69ccc144",
@@ -608,6 +612,7 @@ async def get_filtered_products(req: Optional[object] = None) -> dict:
                     "description": "Clear deep ruby in color with medium intensity",
                     "userimageurl": "default_image_url",
                 },
+                "additionalDetail": {}
             },
         ]
     }
